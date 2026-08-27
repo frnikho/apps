@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/frnikho/apps/compare/v1.0.1...v1.1.0) (2026-08-27)
+
+
+### Features
+
+* enhance README with project description, app details, and deployment instructions ([ad9f8d7](https://github.com/frnikho/apps/commit/ad9f8d787ed3a32516bfdd406f6e50cdd6e4e26b))
+
 ## [1.0.1](https://github.com/frnikho/apps/compare/v1.0.0...v1.0.1) (2026-08-27)
 
 
