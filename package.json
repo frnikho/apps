@@ -1,7 +1,7 @@
 {
-	"name": "garden",
+	"name": "apps",
 	"private": true,
-	"repository": "https://github.com/frnikho/garden",
+	"repository": "https://github.com/frnikho/apps",
 	"type": "module",
 	"imports": {
 		"@*": "./src/*"
