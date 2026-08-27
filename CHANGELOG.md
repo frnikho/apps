@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/frnikho/apps/compare/v1.0.0...v1.0.1) (2026-08-27)
+
+
+### Bug Fixes
+
+* standardize punctuation in text across components and update README with project description ([fbd1119](https://github.com/frnikho/apps/commit/fbd1119be76b591ed7e4b74624d5c5d5b9d9673e))
+
 # 1.0.0 (2026-08-27)
 
 
