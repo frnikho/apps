@@ -34,7 +34,7 @@ export function SharePanel({ raw: _raw, shortUrl, shortLoading, shortErr, onCopy
               <a href={shortUrl} className="underline">
                 {shortUrl}
               </a>{" "}
-              — copié !
+              - copié !
             </div>
             <div className="text-[11px] text-zinc-500 mt-1">Expire dans 24h. Suppression auto. Aucune donnée perso collectée.</div>
           </div>

@@ -85,8 +85,8 @@ function RouteComponent() {
       <div className="max-w-6xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div>
           <div className="flex flex-wrap gap-2 mb-3 items-center">
-            <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">🔒 hash privé — 0 stockage serveur</span>
-            {tooLong && <span className="text-xs px-2 py-1 rounded-full bg-amber-500/15 text-amber-300">URL longue — pense au lien court</span>}
+            <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">🔒 hash privé - 0 stockage serveur</span>
+            {tooLong && <span className="text-xs px-2 py-1 rounded-full bg-amber-500/15 text-amber-300">URL longue - pense au lien court</span>}
           </div>
 
           {/* biome-ignore lint/style/noNonNullAssertion: early return garantit non-null */}
@@ -105,7 +105,7 @@ function RouteComponent() {
             <ul className="mt-2 text-xs text-zinc-500 list-disc pl-4 space-y-1">
               <li>Hash = jamais envoyé au serveur, jamais loggé.</li>
               <li>Lien court = stockage temporaire 24h, pas de tracking.</li>
-              <li>Compression native (Bun/CompressionStream) — 0 dépendance lourde.</li>
+              <li>Compression native (Bun/CompressionStream) - 0 dépendance lourde.</li>
             </ul>
           </div>
         </div>

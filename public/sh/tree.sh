@@ -47,7 +47,7 @@ LEN=${#URL}
 
 echo "🌳  tree: $TARGET (depth $DEPTH)"
 echo "🔗  $URL"
-echo "   (${LEN} chars, hash privé — rien n'est envoyé au serveur)"
+echo "   (${LEN} chars, hash privé - rien n'est envoyé au serveur)"
 if [ "$LEN" -gt 1800 ]; then
   echo ""
   echo "   ⚠️  URL longue (>1800). Ouvre le lien puis clique 'Générer lien court (24h)' pour partager."
