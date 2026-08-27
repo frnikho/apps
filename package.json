@@ -9,7 +9,7 @@
 	"scripts": {
 		"dev": "vite dev --port 3000",
 		"generate-routes": "tsr generate",
-		"build": "vite build",
+		"build": "vite build && rm -f .output/public/sh/tree.sh",
 		"preview": "vite preview",
 		"check-types": "tsc --noEmit",
 		"format": "biome format",

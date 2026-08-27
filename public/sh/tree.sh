@@ -3,7 +3,7 @@ set -euo pipefail
 
 TARGET="${1:-.}"
 DEPTH="${2:-5}"
-BASE_URL="${BASE_URL:-http://localhost:3000}"
+HOST="${HOST:-https://app.nikho.dev}"
 
 gen_tree() {
   local target="$1" depth="$2"
@@ -42,7 +42,7 @@ b64 = base64.urlsafe_b64encode(compressed).decode('ascii').rstrip('=')
 print(b64)
 ")
 
-URL="${BASE_URL}/tree#${B64}"
+URL="${HOST}/tree#${B64}"
 LEN=${#URL}
 
 echo "🌳  tree: $TARGET (depth $DEPTH)"

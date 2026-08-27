@@ -24,6 +24,7 @@ ENV NITRO_HOST=0.0.0.0
 ENV HOST=app.nikho.dev
 
 COPY --from=build /app/.output ./.output
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 RUN mkdir -p /app/.data/tree
 VOLUME ["/app/.data"]
@@ -32,4 +33,5 @@ EXPOSE 3000
 
 USER bun
 
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["bun", "./.output/server/index.mjs"]

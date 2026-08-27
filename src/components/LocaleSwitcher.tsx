@@ -15,7 +15,6 @@ export default function ParaglideLocaleSwitcher() {
         alignItems: 'center',
         color: 'inherit',
       }}
-      aria-label={m.language_label()}
     >
       <span style={{ opacity: 0.85 }}>
         {m.current_locale({ locale: currentLocale })}
@@ -23,6 +22,7 @@ export default function ParaglideLocaleSwitcher() {
       <div style={{ display: 'flex', gap: '0.25rem' }}>
         {locales.map((locale) => (
           <button
+            type={'button'}
             key={locale}
             onClick={() => setLocale(locale)}
             aria-pressed={locale === currentLocale}
