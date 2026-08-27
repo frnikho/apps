@@ -1,0 +1,14 @@
+node_modules
+.output
+.data
+.git
+.github
+.idea
+.tanstack
+.env
+.env.*
+*.local
+README.md
+Dockerfile
+docker-compose.yml
+pnpm-lock.yaml

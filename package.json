@@ -1,0 +1,58 @@
+{
+	"name": "garden",
+	"private": true,
+	"repository": "https://github.com/frnikho/garden",
+	"type": "module",
+	"imports": {
+		"@*": "./src/*"
+	},
+	"scripts": {
+		"dev": "vite dev --port 3000",
+		"generate-routes": "tsr generate",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check-types": "tsc --noEmit",
+		"format": "biome format",
+		"lint": "biome lint",
+		"lint:fix": "biome lint --fix",
+		"check": "biome check"
+	},
+	"dependencies": {
+		"@t3-oss/env-core": "^0.13.11",
+		"@tailwindcss/vite": "~4.3.3",
+		"@tanstack/react-devtools": "latest",
+		"@tanstack/react-query": "latest",
+		"@tanstack/react-query-devtools": "latest",
+		"@tanstack/react-router": "latest",
+		"@tanstack/react-router-devtools": "latest",
+		"@tanstack/react-router-ssr-query": "latest",
+		"@tanstack/react-start": "latest",
+		"nitro": "3.0.260610-beta",
+		"nuqs": "^2.10.1",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
+		"tailwindcss": "^4.3.3",
+		"valibot": "^1.4.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.5",
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.0.0",
+		"@inlang/paraglide-js": "^2.13.1",
+		"@semantic-release/changelog": "^6.0.3",
+		"@semantic-release/git": "^10.0.1",
+		"@semantic-release/github": "^12.0.2",
+		"@tanstack/devtools-vite": "latest",
+		"@tanstack/router-cli": "^1.132.0",
+		"@types/node": "^22.10.2",
+		"@types/react": "^19.2.0",
+		"@types/react-dom": "^19.2.0",
+		"@vitejs/plugin-react": "^6.0.1",
+		"semantic-release": "^24.2.9",
+		"typescript": "^7.0.2",
+		"vite": "^8.0.0"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": ["esbuild", "lightningcss"]
+	}
+}

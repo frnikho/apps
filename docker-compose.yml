@@ -1,0 +1,25 @@
+services:
+  cache:
+    container_name: app_cache
+    image: valkey:9.1.1
+    ports:
+      - "6379:6379"
+    restart: always
+
+  garden:
+    container_name: app_garden
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - garden_data:/app/.data
+    depends_on:
+      - cache
+    restart: unless-stopped
+
+volumes:
+  garden_data:
