@@ -83,3 +83,23 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
+      - name: Trigger Dokploy deploy
+        if: success()
+        continue-on-error: true
+        env:
+          DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DEPLOY_WEBHOOK_URL" ]; then
+            echo "::notice::DEPLOY_WEBHOOK_URL not set - skipping autodeploy"
+            exit 0
+          fi
+          echo "Triggering Dokploy webhook..."
+          # Dokploy deploy webhook: POST vide, 2xx = ok. On masque l'URL dans les logs.
+          set +x
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 -X POST "$DEPLOY_WEBHOOK_URL" -H "Content-Type: application/json" -d '{}' || echo "000")
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "Dokploy deploy triggered (HTTP $HTTP_CODE)"
+          else
+            echo "::warning::Dokploy webhook returned HTTP $HTTP_CODE (non-blocking)"
+            exit 0
+          fi
