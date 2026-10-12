@@ -1,217 +1,151 @@
-Welcome to your new TanStack Start app!
+<div align="center">
 
-# Getting Started
+# ⚡ apps
 
-To run this application:
+**One repo, many small apps.**<br />
+The foundation behind everything that lives at [apps.nikho.dev](https://apps.nikho.dev).
+
+<br />
+
+[![Build](https://img.shields.io/github/actions/workflow/status/frnikho/apps/build.yml?branch=develop&style=for-the-badge&logo=githubactions&logoColor=white&label=build)](../../actions/workflows/build.yml)
+[![Release](https://img.shields.io/github/v/release/frnikho/apps?style=for-the-badge&logo=semanticrelease&logoColor=white&color=e10098)](../../releases)
+[![Docker](https://img.shields.io/badge/ghcr.io-image-2496ED?style=for-the-badge&logo=docker&logoColor=white)](../../pkgs/container/apps)
+
+![TanStack Start](https://img.shields.io/badge/TanStack_Start-000?style=flat-square&logo=reactquery&logoColor=white)
+![React 19](https://img.shields.io/badge/React_19-087ea4?style=flat-square&logo=react&logoColor=white)
+![Tailwind 4](https://img.shields.io/badge/Tailwind_4-0f172a?style=flat-square&logo=tailwindcss&logoColor=38bdf8)
+![Bun](https://img.shields.io/badge/Bun-fbf0df?style=flat-square&logo=bun&logoColor=000)
+![Biome](https://img.shields.io/badge/Biome-60a5fa?style=flat-square&logo=biome&logoColor=white)
+![i18n](https://img.shields.io/badge/i18n-EN_·_FR-16a34a?style=flat-square)
+
+</div>
+
+<br />
+
+## ✨ The idea
+
+Every small app I build is **a route** of this single [TanStack Start](https://tanstack.com/start) project.
+
+They all share the same tooling, i18n, styling, CI and Docker image, so shipping a new idea means writing a route, not bootstrapping yet another repository.
+
+```text
+apps.nikho.dev/            →  home
+apps.nikho.dev/my-app      →  an app, in English
+apps.nikho.dev/fr/my-app   →  the same app, in French
+```
+
+## 🚀 Quick start
 
 ```bash
 bun install
-bun --bun run dev
+bun run dev        # http://localhost:3000
 ```
 
-# Building For Production
+<details>
+<summary><b>All scripts</b></summary>
 
-To build this application for production:
+<br />
 
-```bash
-bun --bun run build
-```
+| Script | What it does |
+| --- | --- |
+| `bun run dev` | Start the dev server |
+| `bun run build` | Production build into `.output/` |
+| `bun run preview` | Preview the production build |
+| `bun run typecheck` | Type-check with `tsc` |
+| `bun run check` | Lint and format check with Biome |
+| `bun run generate-routes` | Regenerate the route tree |
 
-## Styling
+</details>
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+## 🧩 Adding an app
 
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Remove `@tailwindcss/vite` and `tailwindcss` from `package.json`
-
-## Linting & Formatting
-
-This project uses [Biome](https://biomejs.dev/) for linting and formatting. The following scripts are available:
-
-
-```bash
-bun --bun run lint
-bun --bun run format
-bun --bun run check
-```
-
-
-## Deploy with Nitro
-
-This project uses Nitro as a generic server adapter, so it can run on any Node-compatible host.
-
-```bash
-npm run build
-node dist/server/index.mjs
-```
-
-The build output is a self-contained Node server. To deploy, push the `dist/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
-
-For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see https://v3.nitro.build/deploy.
-
-
-# Paraglide i18n
-
-This add-on wires up ParaglideJS for localized routing and message formatting.
-
-- Messages live in `project.inlang/messages`.
-- URLs are localized through the Paraglide Vite plugin and router `rewrite` hooks.
-- Run the dev server or build to regenerate the `src/paraglide` outputs.
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
+**1. Create a route**
 
 ```tsx
-import { Link } from "@tanstack/react-router";
-```
+// src/routes/my-app.tsx
+import { createFileRoute } from "@tanstack/react-router";
+import { m } from "#/paraglide/messages";
 
-Then anywhere in your JSX you can use it like so:
+export const Route = createFileRoute("/my-app")({ component: MyApp });
 
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
+function MyApp() {
+	return <h1>{m.my_app_title()}</h1>;
 }
 ```
 
-## API Routes
+**2. Add its strings**
 
-You can create API routes by using the `server` property in your route definitions:
+```jsonc
+// messages/en.json
+{ "my_app_title": "My app" }
 
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
+// messages/fr.json
+{ "my_app_title": "Mon app" }
 ```
 
-## Data Fetching
+**3. Done.** The route tree regenerates on its own and the app is live at `/my-app` and `/fr/my-app`.
 
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
+## 🌍 Internationalization
 
-For example:
+English is the default and has **no URL prefix**. French lives under `/fr/`.
 
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
+| URL | Locale |
+| --- | --- |
+| `/` | 🇬🇧 English |
+| `/fr/` | 🇫🇷 French |
 
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
+Powered by [Paraglide JS](https://inlang.com/m/gerre34r/library-inlang-paraglideJs): type-safe messages, tree-shaken per page, no runtime overhead.
 
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
+<details>
+<summary><b>How it is wired</b></summary>
+
+<br />
+
+- Locales are declared in `project.inlang/settings.json`
+- Messages live in `messages/{locale}.json`
+- `src/paraglide/` is generated by the Vite plugin
+- `src/router.tsx` rewrites URLs in and out of the router
+- `src/server.ts` resolves the locale from each request
+
+</details>
+
+## 🐳 Docker
+
+```bash
+docker build -t apps .
+docker run --rm -p 3000:3000 apps
 ```
 
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
+Multi-stage build on `oven/bun:slim`. The final image ships only the Nitro bundle (~176 MB), runs as the unprivileged `bun` user and is published for `amd64` and `arm64`.
 
+## 🔁 CI/CD
 
+```mermaid
+flowchart LR
+    A[develop] -->|pull request| B{Build}
+    B --> C[typecheck]
+    B --> D[lint]
+    B --> E[build]
+    C & D & E --> F[docker build]
+    A -->|merge| G[main]
+    G --> H[semantic-release]
+    H -->|new version| I[(ghcr.io)]
+    H --> J[CHANGELOG + GitHub release]
+```
 
-# Learn More
+- **Work on `develop`.** Every push and pull request runs type-check, lint and build in parallel, then a Docker build.
+- **Merge into `main` to ship.** [semantic-release](https://semantic-release.gitbook.io) reads the [Conventional Commits](https://www.conventionalcommits.org), bumps the version, updates `CHANGELOG.md`, creates the GitHub release and pushes the image to `ghcr.io` with the `x.y.z`, `x.y` and `latest` tags.
 
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+| Commit | Release |
+| --- | --- |
+| `feat:` | minor |
+| `fix:` `perf:` `refactor:` `revert:` | patch |
+| `feat!:` or `BREAKING CHANGE` | major |
 
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+<br />
+
+<div align="center">
+
+Built by [nikho](https://nikho.dev)
+
+</div>

@@ -1,9 +1,9 @@
 name: Setup Bun
-description: Installe Bun, restaure le cache GitHub des dépendances et installe avec le lockfile figé.
+description: Install Bun, restore the dependency cache and install with a frozen lockfile.
 
 inputs:
   bun-version:
-    description: Version de Bun
+    description: Bun version
     required: true
 
 runs:
@@ -12,7 +12,7 @@ runs:
     - uses: oven-sh/setup-bun@v2
       with:
         bun-version: ${{ inputs.bun-version }}
-    # Runners GitHub éphémères : le cache distant remplace le cache disque local.
+    # Hosted runners are ephemeral, so the dependency cache lives in GitHub's remote cache.
     - uses: actions/cache@v5
       with:
         path: ~/.bun/install/cache

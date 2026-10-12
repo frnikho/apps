@@ -5,7 +5,7 @@ ARG BUN_VERSION=1.4.3
 FROM oven/bun:${BUN_VERSION}-slim AS base
 WORKDIR /usr/src/app
 
-# Dépendances seules : cette couche ne se reconstruit que si le lockfile change.
+# Manifest-only layer: rebuilt only when the lockfile changes.
 FROM base AS deps
 COPY package.json bun.lock ./
 RUN --mount=type=cache,id=bun-install-cache,target=/root/.bun/install/cache \
@@ -37,7 +37,7 @@ ENV NODE_ENV=production \
     PORT=3000 \
     APP_VERSION=${APP_VERSION}
 
-# Nitro embarque ses dépendances dans .output : pas de node_modules en runtime.
+# Nitro bundles its dependencies into .output, no node_modules needed.
 COPY --from=builder --chown=bun:bun /usr/src/app/.output ./
 
 USER bun

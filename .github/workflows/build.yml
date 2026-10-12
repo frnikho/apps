@@ -26,7 +26,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           bun-version: ${{ env.BUN_VERSION }}
-      # Le typecheck dépend des routes et messages générés.
+      # Typecheck needs the generated route tree.
       - run: bun run generate-routes
       - run: bun run typecheck
 
